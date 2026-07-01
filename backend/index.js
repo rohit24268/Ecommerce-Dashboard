@@ -12,7 +12,14 @@ const jwtKey = process.env.JWT_KEY;
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+app.use(cors({
+  origin: [
+    "http://localhost:3000",          
+    "https://your-frontend.vercel.app" 
+  ],
+  credentials: true
+}));
 
 app.post('/register', async (req, resp) => {
     let user = new User(req.body);
