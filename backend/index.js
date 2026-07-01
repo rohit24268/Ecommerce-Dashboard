@@ -1,6 +1,7 @@
 const express = require('express');
-require('./db/config');
 require("dotenv").config();
+require('./db/config');
+
 
 const User = require('./db/user');
 const Product = require('./db/product');
