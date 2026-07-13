@@ -4,29 +4,34 @@ import { useNavigate } from "react-router-dom";
 
 
 const Nav = () => {
+  const auth = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
 
-    const auth = localStorage.getItem('user');
-    const Navigate = useNavigate();
-    const logout = () => {
-        localStorage.clear();
-        Navigate('/');
-    }
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
-    return (
-        <div>
-            {auth?<ul className="nav-ul">
-                <li><Link to="/">Products</Link></li>
-                <li><Link to="/add">Add Product</Link></li>
-                
-                <li><Link onClick={logout} to='/signup'>Logout({JSON.parse(auth).user.name})</Link></li>
-            </ul>
-            : <ul className="nav-ul nav-right">
-                <li><Link to="/signup">Sign Up</Link></li>
-                <li><Link to="/login">Login</Link></li>
-            </ul>
-            }
-        </div>
-    )
-}
+  return (
+    <div>
+      {auth ? (
+        <ul className="nav-ul">
+          <li><Link to="/">Products</Link></li>
+          <li><Link to="/add">Add Product</Link></li>
+          <li>
+            <Link onClick={logout} to="/signup">
+              Logout ({auth.name})
+            </Link>
+          </li>
+        </ul>
+      ) : (
+        <ul className="nav-ul nav-right">
+          <li><Link to="/signup">Sign Up</Link></li>
+          <li><Link to="/login">Login</Link></li>
+        </ul>
+      )}
+    </div>
+  );
+};
 
 export default Nav
